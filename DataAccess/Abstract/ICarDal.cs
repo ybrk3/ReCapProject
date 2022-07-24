@@ -2,17 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarDal
+    public interface ICarDal:IEntityRepository<Car>
     {
-        List<Car> GetById(int brandId);
-        List<Car> GetAll();
-        void Add(Car car);
-        void Update(Car car);
-        void Delete(Car car);
+        List<Car> GetAll(Expression<Func<Car,bool>> filter = null);
+        //Listeden verilecek filtreye göre arabaları getiren method
+        Car Get(Expression<Func<Car,bool>> filter);
+        //Listeden girilecek filtreye uygun arabaları çekecek olan method
+        void Add(Car entity);
+        void Update(Car entity);
+        void Delete(Car entity);
     }
 }

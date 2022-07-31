@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -12,8 +13,8 @@ namespace Business.Concrete
 {
     public class ColorManager : IColorService
     {
-        IColorService _colorDal;
-        public ColorManager(IColorService colorDal)
+        IColorDal _colorDal;
+        public ColorManager(IColorDal colorDal)
         {
             _colorDal = colorDal;
         }

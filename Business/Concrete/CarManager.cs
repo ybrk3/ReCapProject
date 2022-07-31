@@ -21,12 +21,6 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-
-        public CarManager(RentalCarContext rentalCarContext)
-        {
-            this.rentalCarContext = rentalCarContext;
-        }
-
         public void Add(Car car)
         {
             //Koşullar
@@ -79,6 +73,6 @@ namespace Business.Concrete
             }
         }
 
-       
+
     }
 }

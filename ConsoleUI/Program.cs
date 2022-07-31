@@ -1,12 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Business.Concrete;
 using DataAccess.Concrete;
+using DataAccess.Concrete.EntityFramework;
+using DataAccess.Concrete.InMemoryCar;
 
-CarManager carManager = new CarManager(new InMemoryCar());
+CarManager carManager = new CarManager(new RentalCarContext());
 
-foreach (var car in carManager.GetById(2))
-{
-    Console.WriteLine(car.Description);
-}
+
 
 

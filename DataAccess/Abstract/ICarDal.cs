@@ -1,4 +1,6 @@
-﻿using Entities.Concrete;
+﻿using Core.Data_Access;
+using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +10,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarDal:IEntityRepository<Car>
+    public interface ICarDal : IEntityRepository<Car>
     {
-        List<Car> GetAll(Expression<Func<Car,bool>> filter = null);
-        //Listeden verilecek filtreye göre arabaları getiren method
-        Car Get(Expression<Func<Car,bool>> filter);
-        //Listeden girilecek filtreye uygun arabaları çekecek olan method
-        void Add(Car entity);
-        void Update(Car entity);
-        void Delete(Car entity);
+        public List<CarDetailDto> GetCarDetails();
     }
 }

@@ -4,18 +4,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Data_Access;
 using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    public interface IColorDal : IEquatable<Color>
+    public interface IColorDal : IEntityRepository<Color>
     {
-        List<Color> GetAll(Expression<Func<Color,bool>> filter = null);
-        //Listeden verilecek filtreye göre araba renklerini getiren method
-        Color Get(Expression<Func<Color,bool>> filter);
-        //Listeden girilecek filtreye uygun araba renklerini çekecek olan method
-        void Add(Color entity);
-        void Update(Color entity);
-        void Delete(Color entity);
+        
     }
 }

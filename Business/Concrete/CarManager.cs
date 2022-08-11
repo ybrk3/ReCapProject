@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -15,64 +17,103 @@ namespace Business.Concrete
     public class CarManager : ICarSevice
     {
         ICarDal _carDal;
-        private RentalCarContext rentalCarContext;
-
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
         }
-        public void Add(Car car)
+
+        public IResult Add(Car car)
         {
-            //Koşullar
-            if (car.CarName.Length >= 2 && car.DailyPrice > 0)
+            if (car.CarName.Length>=2 && car.DailyPrice>0)
             {
                 _carDal.Add(car);
+                return new SuccessResult(Messages.CarAdded);
             }
-            else
-            {
-                Console.WriteLine("Araba ismi 2 veya 2 karakterin üzerinde ve Günlük ücret 0'ın üzerinde olmalıdır");
-            }
-
+            return new ErrorResult(Messages.InvalidCarName);
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
-            //Koşullar
             _carDal.Delete(car);
+            return new SuccessResult();
         }
 
-
-
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll(filter);
+            
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
-
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetAllCarDetail()
         {
-            return _carDal.GetCarDetails();
-        }
-        public Car Get(Expression<Func<Car, bool>> filter)
-        {
-            return _carDal.Get(filter);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
-
-
-        public void Update(Car car)
+        public IDataResult<Car> GetById(int id)
         {
-            //Koşullar
-            if (car.CarName.Length >= 2 && car.DailyPrice > 0)
+            var result = _carDal.Get(c=> c.Id==id);
+            if (result==null)
             {
-                _carDal.Update(car);
+                return new ErrorDataResult<Car>(Messages.CarNotFound);
             }
-            else
+            return new SuccessDataResult<Car>(result);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandAndColorIdDetail(int brandId, int colorId)
+        {
+            var result = _carDal.GetCarDetails(c => c.BrandId == brandId && c.ColorId == colorId);
+            if (result==null)
             {
-                Console.WriteLine("Araba ismi 2 karakterin üzerinde ve Günlük ücret 0'ın üzerinde olmalıdır");
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.CarNotFound);
             }
+            return new SuccessDataResult<List<CarDetailDto>>(result, Messages.CarsListed);
+        }
+
+        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        {
+            var result = _carDal.GetAll(c => c.BrandId == brandId);
+            if (result==null)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.CarNotFound);
+            }
+            return new SuccessDataResult<List<Car>>(result, Messages.CarsListed);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandIdDetail(int brandId)
+        {
+            var result = _carDal.GetCarDetails(c => c.BrandId == brandId);
+            if (result==null)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.CarNotFound);
+            }
+            return new SuccessDataResult<List<CarDetailDto>>(result, Messages.CarsListed);
+        }
+
+        public IDataResult<List<Car>> GetCarsByColorId(int id)
+        {
+            var result = _carDal.GetAll(c => c.BrandId == id);
+            if (result == null)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.CarNotFound);
+            }
+            return new SuccessDataResult<List<Car>>(result, Messages.CarsListed);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByColorIdDetail(int colorId)
+        {
+            var result = _carDal.GetCarDetails(c => c.BrandId == colorId);
+            if (result == null)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.CarNotFound);
+            }
+            return new SuccessDataResult<List<CarDetailDto>>(result, Messages.CarsListed);
         }
 
 
+        public IResult Update(Car car)
+        {
+            _carDal.Update(car);
+            return new SuccessResult(Messages.CarUpdated);
+        }
     }
 }

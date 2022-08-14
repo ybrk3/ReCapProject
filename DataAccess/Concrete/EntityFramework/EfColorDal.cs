@@ -1,6 +1,6 @@
 ﻿using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
-using Entities.Concrete;
+using Color.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfColorDal : EfEntityRepositoryBase<Color, RentalCarContext>, IColorDal
+    public class EfColorDal : EfEntityRepositoryBase<Color.Concrete.Color, RentalCarContext>, IColorDal
     {
     }
 }

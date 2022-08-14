@@ -15,5 +15,10 @@ namespace Business.Constants
         public static string InvalidCarName = "Araba ismi en az 2 karakter olmalı";
         public static string MaintenanceTime = "Sistem bakımda. Lütfen daha sonra deneyiniz";
         public static string CarUpdated = "Araç bilgileri güncellenmiştir";
+        public static string UserNotAdded = "Email ve Password bilgileri boş kalamaz";
+        public static string UserAdded = "Hoşgeldiniz";
+        public static string UserDeleted = "Hesabınız başarıyla kapatılmıştır";
+        public static string SuccessfullRent = "Araçınızı teslim alabilirsiniz";
+        public static string UnsuccessfullRent = "Araç müsait değil";
     }
 }

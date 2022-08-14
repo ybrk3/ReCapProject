@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Color.Concrete
 {
-    public class Brand : IEntity
+    public class Customer :  IEntity
     {
-        public int BrandId { get; set; }
-        public string BrandName { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string CompanyName { get; set; }
     }
 }

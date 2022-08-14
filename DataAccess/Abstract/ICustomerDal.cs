@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarDal : IEntityRepository<Car>
+    public interface ICustomerDal : IEntityRepository<Customer>
     {
-        public List<CarDetailDto> GetCarDetails(Expression<Func<Car, bool>> filter=null);
+        public List<CustomerDetailDto> GetCustomerDetails(Expression<Func<Customer, bool>> filter=null) ;
     }
 }

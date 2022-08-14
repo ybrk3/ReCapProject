@@ -2,8 +2,8 @@
 using Business.Constants;
 using Core.Utilities;
 using DataAccess.Abstract;
-using Entities.Concrete;
-using Entities.DTOs;
+using Color.Concrete;
+using Color.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,39 +20,39 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-        public IResult Add(Color color)
+        public IResult Add(Color.Concrete.Color color)
         {
             _colorDal.Add(color);
            return new SuccessResult();
         }
 
-        public IResult Delete(Color color)
+        public IResult Delete(Color.Concrete.Color color)
         {
             _colorDal.Delete(color);
             return new SuccessResult();
         }
 
-        public IDataResult<Color> GetById(int colorId)
+        public IDataResult<Color.Concrete.Color> GetById(int colorId)
         {
             var result = _colorDal.Get(co=> co.ColorId==colorId);
             if (result==null)
             {
-                return new ErrorDataResult<Color>();
+                return new ErrorDataResult<Color.Concrete.Color>();
             }
-            return new SuccessDataResult<Color>(result);
+            return new SuccessDataResult<Color.Concrete.Color>(result);
         }
 
-        public IDataResult<List<Color>> GetAll()
+        public IDataResult<List<Color.Concrete.Color>> GetAll()
         {
             if (DateTime.Now.Hour==1)
             {
-                return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
+                return new ErrorDataResult<List<Color.Concrete.Color>>(Messages.MaintenanceTime);
             } 
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
+            return new SuccessDataResult<List<Color.Concrete.Color>>(_colorDal.GetAll());
         }
 
 
-        public IResult Update(Color color)
+        public IResult Update(Color.Concrete.Color color)
         {
             _colorDal.Update(color);
            return new SuccessResult();

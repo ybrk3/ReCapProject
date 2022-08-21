@@ -1,6 +1,6 @@
 ﻿using Core.Data_Access;
-using Color.Concrete;
-using Color.DTOs;
+using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

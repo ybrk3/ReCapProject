@@ -4,8 +4,9 @@ using DataAccess.Abstract;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemoryCar;
-using Color.Concrete;
+using Entities.Concrete;
 using System.Drawing;
+using Business.Abstract;
 
 //UserManager userManager = new UserManager(new EfUserDal());
 //var users = userManager.GetAll();
@@ -24,6 +25,14 @@ using System.Drawing;
 //CustomerTest();
 
 //UserTest();
+
+
+CarManager carManager = new CarManager(new EfCarDal());
+Car car1 = new Car { Id = 1, BrandId = 1, ColorId = 1, CarName = "BMW 1.18", DailyPrice = 645, ModelYear = "2021", Description = "2.000 km'de, Joy plus paket. Aylık kiralamada kapmanya mevcuttur" };
+carManager.Add(car1);
+
+
+
 
 
 static void CustomerTest()

@@ -10,7 +10,7 @@ namespace Business.Constants
     {
         public static string CarAdded = "Araba listeye eklendi";
         public static string CarDeleted = "Araç silinmiştir";
-        public static string CarsListed = "Arablar Listelendi";
+        public static string CarsListed = "Arabalar Listelendi";
         public static string CarNotFound = "Aranılan araç bulunamadı";
         public static string InvalidCarName = "Araba ismi en az 2 karakter olmalı";
         public static string MaintenanceTime = "Sistem bakımda. Lütfen daha sonra deneyiniz";
@@ -20,5 +20,7 @@ namespace Business.Constants
         public static string UserDeleted = "Hesabınız başarıyla kapatılmıştır";
         public static string SuccessfullRent = "Araçınızı teslim alabilirsiniz";
         public static string UnsuccessfullRent = "Araç müsait değil";
+        public static string BrandAdded = "Marka Eklendi";
+        public static string BrandUpdated = "Marka bilgisi güncellendi";
     }
 }

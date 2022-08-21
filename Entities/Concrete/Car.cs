@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Color.Concrete
+namespace Entities.Concrete
 {
+
     public class Car : IEntity
     {
         public int Id { get; set; }

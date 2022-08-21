@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Color.DTOs
+namespace Entities.DTOs
 {
     public class CarDetailDto : IDto
     {

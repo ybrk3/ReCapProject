@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Color.Concrete
+namespace Entities.Concrete
 {
+
     public class Brand : IEntity
     {
         public int BrandId { get; set; }

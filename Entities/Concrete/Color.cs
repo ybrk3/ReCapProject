@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Color.Concrete
+namespace Entities.Concrete
 {
     public class Color : IEntity
     {
-        public int ColorId { get; set; }
+        public int Id { get; set; }
         public string ColorName { get; set; }
     }
 }

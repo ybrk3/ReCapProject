@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
             var result = _carService.GetAll();
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result.Data);
             }
             return BadRequest(result.Message);
         }

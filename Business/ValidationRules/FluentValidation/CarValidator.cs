@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Business.ValidationRules.FluentValidation
 {
+    //FluentValidation paketi kullanılarak validasyonlar yazılır
+    //Başka bir validasyon paketi kullanılabileceği için FluentValidation folderına eklenir
+    //AbstractValidator generic yapısı FluentValidation okaetinden gelmektedir
     public class CarValidator : AbstractValidator<Car>
     {
         public CarValidator()

@@ -1,6 +1,9 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofact.Validation;
 using Core.Utilities;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,13 +21,10 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
+
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
-            if (user.Email==null && user.Password==null)
-            {
-               
-                return new ErrorResult(Messages.UserNotAdded);
-            }
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
@@ -37,12 +37,12 @@ namespace Business.Concrete
 
         public IDataResult<List<User>> GetAll()
         {
-            
+
             return new SuccessDataResult<List<User>>(_userDal.GetAll());
         }
 
         public IDataResult<User> GetByUserId(int userId)
-        {            
+        {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
         }
 

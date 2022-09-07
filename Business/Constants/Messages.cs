@@ -22,5 +22,9 @@ namespace Business.Constants
         public static string UnsuccessfullRent = "Araç müsait değil";
         public static string BrandAdded = "Marka Eklendi";
         public static string BrandUpdated = "Marka bilgisi güncellendi";
+        public static string ImageUploaded = "Resim başarıyla yüklendi";
+        public static string ImageDeleted = "Resim başarıyla silinmiştir";
+        public static string CarImageCountExceeded = "5'den fazla resim yükleyemezsiniz";
+        public static string InvalidImageExtension = "Dosya tipi .jpeg, .png veya .jpg olmalıdır";
     }
 }

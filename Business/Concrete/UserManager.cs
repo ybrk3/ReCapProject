@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofact.Validation;
@@ -23,6 +24,7 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
+       
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
@@ -35,6 +37,7 @@ namespace Business.Concrete
             _userDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);
         }
+       
 
         public IDataResult<List<User>> GetAll()
         {

@@ -44,7 +44,7 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
-            builder.RegisterType<>
+           
 
 
             //Çalışan uygulama içerisinde implemente edilmiş interface'leri bulur ve onlar için AspectInterceptorSelector() çağırır.

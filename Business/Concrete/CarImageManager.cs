@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers;
@@ -23,6 +24,7 @@ namespace Business.Concrete
             _fileHelper = fileHelper;
             _carImage = carImage;
         }
+        [SecuredOperation("car.add, admin")]
         public IResult Add(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckCarImageCount(carImage.CarID));

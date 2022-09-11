@@ -11,6 +11,7 @@
     <PackageReference Include="FluentValidation" Version="11.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.23.1" />
   </ItemGroup>
 
 </Project>

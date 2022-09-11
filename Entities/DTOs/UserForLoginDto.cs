@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
-
+namespace Entities.DTOs
 {
-    public class User:IEntity
+
+    //Password db'de yok o yüzden Dto oluşturuldu Hem register hem de login için
+    //GetClaim içerisine UserName ismi koyulması da gerekebilir. O yüzden de oluşturulur
+    public class UserForLoginDto :IDto
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }

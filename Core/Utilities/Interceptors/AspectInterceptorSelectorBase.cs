@@ -16,6 +16,9 @@ namespace Core.Utilities.Interceptors
                 .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
             //Ve onları Listeye koyar
             classAttributes.AddRange(methodAttributes);
+
+            // classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger))); (Sistemde herşeyi loglar)
+
             //Attribute'ları önem sırasına göre sıralar. MethodInterceptionBaseAttribute içerisindeki Priority üzerinden
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }

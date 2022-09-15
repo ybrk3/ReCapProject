@@ -2,6 +2,8 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofact.Caching;
+using Core.Aspects.Autofact.Performance;
 using Core.Aspects.Autofact.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities;
@@ -24,27 +26,29 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-       
+        
         [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserDal.Get")]
         public IResult Add(User user)
         {
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
-
+        [CacheRemoveAspect("IUserDal.Get")]
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);
         }
-       
 
+        [PerformanceAspect(6)]
         public IDataResult<List<User>> GetAll()
         {
 
             return new SuccessDataResult<List<User>>(_userDal.GetAll());
         }
 
+        [PerformanceAspect(6)]
         public User GetByMail(string mail)
         {
             return _userDal.Get(u=> u.Email== mail);
@@ -60,6 +64,7 @@ namespace Business.Concrete
             return _userDal.GetClaims(user);
         }
 
+        [CacheRemoveAspect("IUserDal.Get")]
         public IResult Update(User user)
         {
             _userDal.Update(user);

@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
+using Core.Aspects.Autofact.Performance;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers;
 using Core.Utilities.Results;
@@ -25,6 +26,7 @@ namespace Business.Concrete
             _carImage = carImage;
         }
         [SecuredOperation("car.add, admin")]
+        [PerformanceAspect(6)]
         public IResult Add(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckCarImageCount(carImage.CarID));
@@ -53,6 +55,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(_carImage.GetAll());
         }
 
+        [PerformanceAspect(10)]
         public IDataResult<List<CarImage>> GetByCarId(int carId)
         {
             var result = _carImage.GetAll(c=> c.Id == carId).Count;

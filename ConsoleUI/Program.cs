@@ -28,9 +28,9 @@ using Core.Entities.Concrete;
 //UserTest();
 
 
-CarManager carManager = new CarManager(new EfCarDal());
-Car car1 = new Car { Id = 1, BrandId = 1, ColorId = 1, CarName = "BMW 1.18", DailyPrice = 645, ModelYear = "2021", Description = "2.000 km'de, Joy plus paket. Aylık kiralamada kapmanya mevcuttur" };
-carManager.Add(car1);
+//CarManager carManager = new CarManager(new EfCarDal());
+//Car car1 = new Car { Id = 1, BrandId = 1, ColorId = 1, CarName = "BMW 1.18", DailyPrice = 645, ModelYear = "2021", Description = "2.000 km'de, Joy plus paket. Aylık kiralamada kapmanya mevcuttur" };
+//carManager.Add(car1);
 
 
 

@@ -28,9 +28,12 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  CarId = c.Id,
                                  CarName = c.CarName,
+                                 BrandId = b.BrandId,
+                                 ColorId = co.Id,
                                  BrandName = b.BrandName,
                                  ColorName = co.ColorName,
-                                 DailyPrice = c.DailyPrice
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description,
                              };
                 return result.ToList();
             }

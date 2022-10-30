@@ -83,12 +83,12 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.CarNotFound);
             }
-            return new SuccessDataResult<List<Car>>(result, Messages.CarsListed);
+            return new SuccessDataResult<List<Car>>(result);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByBrandIdDetail(int brandId)
         {
-            var result = _carDal.GetCarDetails(c => c.BrandId == brandId);
+            var result = _carDal.GetCarDetails().Where(x => x.BrandId == brandId).ToList();
             if (result==null)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.CarNotFound);
@@ -96,19 +96,19 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(result, Messages.CarsListed);
         }
 
-        public IDataResult<List<Car>> GetCarsByColorId(int id)
+        public IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId)
         {
-            var result = _carDal.GetAll(c => c.BrandId == id);
+            var result = _carDal.GetCarDetails().Where(c => c.ColorId == colorId).ToList();
             if (result == null)
             {
-                return new ErrorDataResult<List<Car>>(Messages.CarNotFound);
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.CarNotFound);
             }
-            return new SuccessDataResult<List<Car>>(result, Messages.CarsListed);
+            return new SuccessDataResult<List<CarDetailDto>>(result, Messages.CarsListed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByColorIdDetail(int colorId)
         {
-            var result = _carDal.GetCarDetails(c => c.BrandId == colorId);
+            var result = _carDal.GetCarDetails().Where(c => c.ColorId == colorId).ToList();
             if (result == null)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.CarNotFound);
@@ -123,5 +123,10 @@ namespace Business.Concrete
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
+
+        IDataResult<List<Car>> ICarSevice.GetCarsByColorId(int id)
+        {
+          return  new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id).ToList())
+ ;        }
     }
 }

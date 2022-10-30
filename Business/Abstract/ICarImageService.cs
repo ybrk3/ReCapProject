@@ -11,13 +11,11 @@ namespace Business.Abstract
 {
     public interface ICarImageService
     {
-        IResult Add(IFormFile file, CarImage carImage); 
-        IResult Delete(CarImage carImage); //nesne üzerinden filePath çekilir
-        IResult Update(IFormFile file ,CarImage carImage); //eklenecek ve silinecek resim
-
+        IResult Add(IFormFileCollection formFiles, int id);
         IDataResult<List<CarImage>> GetAll();
-        IDataResult<List<CarImage>> GetByCarId(int carId);
-        IDataResult<CarImage> GetByImageId(int imageId);
+        IDataResult<CarImage> GetCarImageById(int id);
+        IResult Update(IFormFile file, CarImage carImage);
+        IResult Delete(CarImage carImage);
 
     }
 }

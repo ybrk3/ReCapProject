@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Utilities.Results;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,47 +8,63 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Helpers
 {
-    public class FileHelperManager : IFileHelper
+    public class FileHelperManager 
     {
-        public string Add(IFormFile file, string root) //Dosya ve kayıt edilecek uzantı istenir
+        public static string Add(IFormFile file)
         {
-            if (file.Length > 0) //Yüklenecek dosyanın varlığı kontrol edilir.
+            var sourcePath = Path.GetTempFileName();
+            if (file.Length >= 0)
             {
-                if (!Directory.Exists(root)) //Dosyaların kaydedileceği yerin kontrolü yapılır
+                using (var stream = new FileStream(sourcePath, FileMode.Create))
                 {
-                    Directory.CreateDirectory(root); //Dosyanın kaydedileceği yer yok ise oluşturulur
-                }
-                string extension = Path.GetExtension(file.FileName); //Yüklenecek dosyanın uzantısı çekilir
-                string fileName = Guid.NewGuid().ToString(); //Yüklenecek dosya ismi random olarak çekilir
-                string filePath = fileName + extension; //Dosya ismi ve uzantısı birleştirili (.txt, .jpeg vb.)
-                using (FileStream fileStream = File.Create(root + filePath)) //Dosyanın yükleneceği yer, dosya ismi ve uzantısı üzerinden ilgili yerde
-                                                                             //dosya oluşturulur.
-                {
-
-                    file.CopyTo(fileStream);//Kopyalanacak dosyanın kopyalanacağı akışı belirtti.
-                                            //yani yukarıda gelen IFromFile türündeki file dosyasınınnereye kopyalacağını söyledik.
-                    fileStream.Flush();//arabellekten siler. Dosyayı kapatır.
-                    return filePath;//burada dosyamızın tam adını geri gönderiyoruz sebebide sql servere dosya eklenirken adı ile eklenmesi için.
+                    file.CopyTo(stream);
                 }
             }
-            return null;
+            var result = NewPath(file);
+            File.Move(sourcePath, result);
+            string[] path = result.Split('\\');
+            string newImagePath = path[path.Length - 2].ToString();
+            newImagePath = "/" + newImagePath + "/" + path[path.Length - 1].ToString();
+            return newImagePath;
         }
 
-        public void Delete(string filePath)
+        public static IResult Delete(string path)
         {
-            if (Directory.Exists(filePath))
+            try
             {
-                Directory.Delete(filePath);
+                File.Delete(path);
             }
+            catch (Exception exeption)
+            {
+
+                return new ErrorResult(exeption.Message);
+            }
+            return new SuccessResult();
         }
 
-        public string Update(IFormFile file, string filePath, string root) //string ile filePath döndürülüp sql'de tutulacak
+        public static string Update(string sourcePath, IFormFile file)
         {
-            if (Directory.Exists(filePath))
+            var result = NewPath(file);
+            if (sourcePath.Length > 0)
             {
-                Directory.Delete(filePath);
+                using (var stream = new FileStream(result, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
             }
-            return Add(file, root);
+            File.Delete(sourcePath);
+            return result;
+        }
+
+        public static string NewPath(IFormFile file)
+        {
+            FileInfo fileInfo = new FileInfo(file.FileName);
+            string fileExtension = fileInfo.Extension;
+
+            string path = Environment.CurrentDirectory + @"\wwwroot\uploads";
+            var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + fileExtension;
+            string result = $@"{path}\{newPath}";
+            return result;
         }
     }
 }

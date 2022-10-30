@@ -19,6 +19,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+//FrontEnd'den bağlanabilmek için
+builder.Services.AddCors();
+
 //API'ye jwt kullan�laca�� bildiriliyor
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
@@ -66,7 +69,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
 
 app.UseHttpsRedirection();
 app.UseRouting();

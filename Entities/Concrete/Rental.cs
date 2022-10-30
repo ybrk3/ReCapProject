@@ -12,8 +12,9 @@ namespace Entities.Concrete
 
         public int Id { get; set; }
         public int CarId { get; set; }
-        public int CustomerID { get; set; }
+        public int CustomerId { get; set; }
+        public int BrandId { get; set; }
         public DateTime RentDate { get; set; }
-        public DateTime ReturnDate { get; set; } //Araba teslim edilmemişse ReturnDate null'dır ?????
+        public Nullable<DateTime> ReturnDate { get; set; } //Araba teslim edilmemişse ReturnDate null'dır ?????
     }
 }

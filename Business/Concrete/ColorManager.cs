@@ -34,8 +34,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Color>> GetAll()
         {
-            _colorDal.GetAll();
-            return new SuccessDataResult<List<Color>>();
+             var result =  _colorDal.GetAll(); // bu satır yoktu renkler gelmiyordu.
+            return new SuccessDataResult<List<Color>>(result);
         }
 
         public IDataResult<Color> GetById(int colorId)

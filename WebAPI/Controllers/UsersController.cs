@@ -22,9 +22,9 @@ namespace WebAPI.Controllers
             var result = _userService.Add(user);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
         [HttpPost("delete")]
         public IActionResult Delete(User user)
@@ -32,9 +32,9 @@ namespace WebAPI.Controllers
             var result = _userService.Delete(user);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
         [HttpPost("update")]
         public IActionResult Update(User user)
@@ -42,9 +42,9 @@ namespace WebAPI.Controllers
             var result = _userService.Update(user);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
@@ -52,9 +52,9 @@ namespace WebAPI.Controllers
             var result = _userService.GetAll();
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
         [HttpGet("getbyid")]
         public IActionResult GetRentalById(int userId)
@@ -62,9 +62,9 @@ namespace WebAPI.Controllers
             var result = _userService.GetByUserId(userId);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
     }
 }

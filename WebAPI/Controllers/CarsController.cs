@@ -22,9 +22,9 @@ namespace WebAPI.Controllers
             var result = _carService.Add(car);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("updatecar")]
@@ -33,9 +33,9 @@ namespace WebAPI.Controllers
             var result = _carService.Update(car);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("deletecar")]
@@ -44,9 +44,9 @@ namespace WebAPI.Controllers
             var result = _carService.Delete(car);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpGet("getall")]
@@ -55,9 +55,9 @@ namespace WebAPI.Controllers
             var result = _carService.GetAll();
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpGet("getcarsbybrandid")]
@@ -66,9 +66,9 @@ namespace WebAPI.Controllers
             var cars = _carService.GetCarsByBrandId(brandId);
             if (cars.Success)
             {
-                return Ok(cars.Data);
+                return Ok(cars);
             }
-            return BadRequest(cars.Message);
+            return BadRequest(cars);
         }
 
         [HttpGet("getcarsbycolorid")]
@@ -77,9 +77,9 @@ namespace WebAPI.Controllers
             var cars = _carService.GetCarsByColorId(colorId);
             if (cars.Success)
             {
-                return Ok(cars.Data);
+                return Ok(cars);
             }
-            return BadRequest(cars.Message);
+            return BadRequest(cars);
         }
 
         [HttpGet("getcarsbybrandiddetail")]
@@ -88,9 +88,9 @@ namespace WebAPI.Controllers
             var cars= _carService.GetCarsByBrandIdDetail(brandId);
             if (cars.Success)
             {
-                return Ok(cars.Data);
+                return Ok(cars);
             }
-            return BadRequest(cars.Message);
+            return BadRequest(cars);
         }
 
         [HttpGet("getcarsbycoloriddetail")]
@@ -99,9 +99,9 @@ namespace WebAPI.Controllers
             var cars = _carService.GetCarsByColorIdDetail(colorId);
             if (cars.Success)
             {
-                return Ok(cars.Data);
+                return Ok(cars);
             }
-            return BadRequest(cars.Message);
+            return BadRequest(cars);
         }
 
         [HttpGet("getallcardetail")]
@@ -110,9 +110,9 @@ namespace WebAPI.Controllers
             var cars = _carService.GetAllCarDetail();
             if (cars.Success)
             {
-                return Ok(cars.Data);
+                return Ok(cars);
             }
-            return BadRequest(cars.Message);
+            return BadRequest(cars);
         }
 
 
@@ -122,9 +122,9 @@ namespace WebAPI.Controllers
             var cars= _carService.GetById(carId);
             if (cars.Success)
             {
-                return Ok(cars.Data);
+                return Ok(cars);
             }
-            return BadRequest(cars.Message);
+            return BadRequest(cars);
         }
 
         [HttpGet("getcarsbybrandandcoloriddetail")]
@@ -133,9 +133,9 @@ namespace WebAPI.Controllers
             var cars= _carService.GetCarsByBrandAndColorIdDetail(brandId, colorId);
             if (cars.Success)
             {
-                return Ok(cars.Data);
+                return Ok(cars);
             }
-            return BadRequest(cars.Message);
+            return BadRequest(cars);
         }
 
 

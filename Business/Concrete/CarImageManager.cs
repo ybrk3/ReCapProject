@@ -29,25 +29,34 @@ namespace Business.Concrete
        
         public IResult Add(IFormFileCollection formFiles, int carId)
         {
-            CarImage carImage = new CarImage();
-            var result = false;
-            foreach (var formFile in formFiles)
+                       CarImage carImage = new CarImage();
+            IResult ruleResult = BusinessRules.Run(CheckImageLimitExceeded(carImage.CarId));
+            if (ruleResult.Success)
             {
-                carImage.ImagePath = FileHelperManager.Add(formFile);
-                carImage.CarId = carId;
-                carImage.Date = DateTime.Now;
-                _carImageDal.Add(carImage);
-                result = true;
-              
-            }
-            if (result)
-            {
-                return new SuccessResult();
+                var result = false;
+                foreach (var formFile in formFiles)
+                {
+                    carImage.ImagePath = FileHelperManager.Add(formFile);
+                    carImage.CarId = carId;
+                    carImage.Date = DateTime.Now;
+                    _carImageDal.Add(carImage);
+                    result = true;
+
+                }
+                if (result)
+                {
+                    return new SuccessResult();
+                }
+                else
+                {
+                    return new ErrorResult();
+                }
             }
             else
             {
-                return new ErrorResult();
+                return new ErrorResult("5'den fazla resim yükleyemezsiniz");
             }
+            
         }
         
         public IResult Delete(CarImage carImage)
@@ -70,7 +79,7 @@ namespace Business.Concrete
         public IResult Update(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckImageLimitExceeded(carImage.CarId));
-            if (result != null)
+            if (result.Success)
             {
                 return new ErrorDataResult<CarImage>(result.Message);
             }

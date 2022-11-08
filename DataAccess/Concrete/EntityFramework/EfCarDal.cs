@@ -34,6 +34,9 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = co.ColorName,
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
+                                 ImagePath = (from img in context.CarImages
+                                              where img.CarId == c.Id
+                                              select img.ImagePath).FirstOrDefault()
                              };
                 return result.ToList();
             }

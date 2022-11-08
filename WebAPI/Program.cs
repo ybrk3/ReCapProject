@@ -72,6 +72,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 //Token ile authorize edilecek kullanici
